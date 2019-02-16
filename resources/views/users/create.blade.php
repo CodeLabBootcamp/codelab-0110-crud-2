@@ -6,7 +6,7 @@
             @include('layouts.errors')
             <div class="card">
                 <div class="card-body">
-                    <form action="/users" method="post">
+                    <form action="/dashboard/users" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="name">Name</label>

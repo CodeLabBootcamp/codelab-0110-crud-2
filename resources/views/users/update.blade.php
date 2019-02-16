@@ -6,7 +6,7 @@
             @include('layouts.errors')
             <div class="card">
                 <div class="card-body">
-                    <form action="/users/{{$user->id}}" method="post">
+                    <form action="/dashboard/users/{{$user->id}}" method="post">
                         @csrf
                         @method('patch')
                         <div class="form-group">

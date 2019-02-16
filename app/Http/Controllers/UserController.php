@@ -44,7 +44,7 @@ class UserController extends Controller
         ];
         $data = $this->validate($request,$rules);
         User::create($data);
-        return Response::redirectTo("/users");
+        return Response::redirectTo("/dashboard/users");
     }
 
     /**
@@ -85,7 +85,7 @@ class UserController extends Controller
         ];
         $data = $this->validate($request,$rules);
         $user->update($data);
-        return Response::redirectTo("/users");
+        return Response::redirectTo("/dashboard/users");
     }
 
     /**
@@ -97,6 +97,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return Response::redirectTo("/users");
+        return Response::redirectTo("/dashboard/users");
     }
 }

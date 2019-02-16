@@ -9,7 +9,7 @@
                             <h4 class="m-0">Users</h4>
                         </div>
                         <div class="col-auto">
-                            <a  class="btn btn-primary" href="/users/create">Create new user</a>
+                            <a  class="btn btn-primary" href="/dashboard/users/create">Create new user</a>
 
                         </div>
                     </div>
@@ -31,8 +31,8 @@
                             <td>{{$user->email}}</td>
                             <td>
                                 <div class="btn-group" role="group" >
-                                    <a class="btn btn-warning" href="/users/{{$user->id}}/edit">Edit</a>
-                                    <form action="/users/{{$user->id}}" method="post">
+                                    <a class="btn btn-warning" href="/dashboard/users/{{$user->id}}/edit">Edit</a>
+                                    <form action="/dashboard/users/{{$user->id}}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">Delete</button>

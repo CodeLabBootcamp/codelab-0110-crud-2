@@ -9,7 +9,7 @@
                             <h4 class="m-0">Cars</h4>
                         </div>
                         <div class="col-auto">
-                            <a  class="btn btn-primary" href="/cars/create">Create new car</a>
+                            <a  class="btn btn-primary" href="/dashboard/cars/create">Create new car</a>
 
                         </div>
                     </div>
@@ -31,8 +31,8 @@
                             <td>{{$car->year}}</td>
                             <td>
                                 <div class="btn-group" role="group" >
-                                    <a class="btn btn-warning" href="/cars/{{$car->id}}/edit">Edit</a>
-                                    <form action="/cars/{{$car->id}}" method="post">
+                                    <a class="btn btn-warning" href="/dashboard/cars/{{$car->id}}/edit">Edit</a>
+                                    <form action="/dashboard/cars/{{$car->id}}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">Delete</button>

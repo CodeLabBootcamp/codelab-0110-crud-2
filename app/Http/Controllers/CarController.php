@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
-
+use Illuminate\Support\Facades\Redirect;
+use Response;
 class CarController extends Controller
 {
     /**
@@ -16,7 +17,12 @@ class CarController extends Controller
     public function index()
     {
         $cars = Car::all();
-        return view('cars.index')->with('cars', $cars);
+        $users = User::all();
+        $data = [
+            "cars" => $cars,
+            "users" => $users
+        ];
+        return view('cars.index',$data);
     }
 
     /**
@@ -26,25 +32,31 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('cars.create');
+        $users = User::all();
+
+        return view('cars.create', ["users" => $users]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $rules = [
             "brand_name" => "required",
-            "year" => "required"
+            "year" => "required",
+            "image" => "required",
+            "user_id" => ["required", "exists:users,id"]
         ];
         $data = $this->validate($request, $rules);
+
+
         $car = Car::create($data);
 
-        return Response::redirectTo("/cars");
+        return Response::redirectTo("/dashboard/cars");
     }
 
     /**
@@ -66,7 +78,9 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        return view('cars.update')->with('car',$car);
+        $users = User::all();
+
+        return view('cars.update')->with('car', $car)->with('users', $users);
     }
 
     /**
@@ -80,12 +94,14 @@ class CarController extends Controller
     {
         $rules = [
             "brand_name" => "required",
-            "year" => "required"
+            "year" => "required",
+            "image" => "required",
+            "user_id" => ["required", "exists:users,id"]
         ];
         $data = $this->validate($request, $rules);
         $car->update($data);
 
-        return Response::redirectTo("/cars");
+        return Response::redirectTo("/dashboard/cars");
     }
 
     /**
@@ -96,6 +112,8 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $car->delete();
+        return Response::redirectTo("/dashboard/cars");
+
     }
 }
